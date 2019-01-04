@@ -1,6 +1,8 @@
 # kompile-testing [![Build Status](https://travis-ci.org/permissions-dispatcher/kompile-testing.svg?branch=master)](https://travis-ci.org/permissions-dispatcher/kompile-testing)
 
-A library for testing `kotlinc` compilation with kotlin annotation processors([kapt](https://kotlinlang.org/docs/reference/kapt.html)).
+A library for testing `kotlinc` compilation with kotlin annotation processors([kapt](https://kotlinlang.org/docs/reference/kapt.html)) which is strongly inspired by [google/compile-testing](https://github.com/google/compile-testing).
+
+kompile-testing gives you an easy way to assert not only annotation processors can handle incorrect inputs and prints the correct errors but also the generated Kotlin file is correctly formed.
 
 > NOTE: Current library's status is still in development especially due to performance issue. Use at your own risk:D
 
