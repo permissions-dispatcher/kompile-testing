@@ -6,9 +6,11 @@ A library for testing `kotlinc` compilation with kotlin annotation processors([k
 
 ## Installation
 
+`latestVersion` is [ ![Download](https://api.bintray.com/packages/hotchemi/maven/kompile-testing/images/download.svg) ](https://bintray.com/hotchemi/maven/kompile-testing/_latestVersion)
+
 ```groovy
 dependencies {
-  testImplementation "org.permissionsdispatcher:kompile-testing:0.1.0"
+    testImplementation "org.permissionsdispatcher:kompile-testing:{latestVersion}"
 }
 ```
 
