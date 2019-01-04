@@ -23,14 +23,22 @@ fun addFile(dir: File, fileName: String, source: String) {
 @Target(AnnotationTarget.CLASS)
 annotation class TestAnnotation
 
-abstract class TestAnnotationProcessor : AbstractProcessor() {
+open class TestAnnotationProcessor : AbstractProcessor() {
     companion object {
         const val KAPT_KOTLIN_GENERATED_OPTION_NAME = "kapt.kotlin.generated"
     }
 
-    abstract fun generatedFileName(): String
-    abstract fun generatedFileContent(): String
-    abstract fun throwExceptionIfNeeded()
+    open fun generatedFileName() = "generated.kt"
+
+    open fun generatedFileContent() = """
+            import kompile.testing.TestAnnotation
+
+            @TestAnnotation
+            class TestClass
+            """.trimIndent()
+
+    open fun throwExceptionIfNeeded() {
+    }
 
     override fun getSupportedSourceVersion(): SourceVersion = SourceVersion.latestSupported()
 
@@ -51,32 +59,10 @@ abstract class TestAnnotationProcessor : AbstractProcessor() {
 }
 
 @AutoService(Processor::class)
-class ValidProcessor : TestAnnotationProcessor() {
-    override fun generatedFileName() = "generated.kt"
-
-    override fun generatedFileContent() = """
-            import kompile.testing.TestAnnotation
-
-            @TestAnnotation
-            class TestClass
-            """.trimIndent()
-
-    override fun throwExceptionIfNeeded() {
-        // no-op
-    }
-}
+class ValidProcessor : TestAnnotationProcessor()
 
 @AutoService(Processor::class)
 class ThrowExceptionProcessor : TestAnnotationProcessor() {
-    override fun generatedFileName() = "generated.kt"
-
-    override fun generatedFileContent() = """
-            import kompile.testing.TestAnnotation
-
-            @TestAnnotation
-            class TestClass
-            """.trimIndent()
-
     override fun throwExceptionIfNeeded() {
         throw RuntimeException("Throw an exception deliberately.")
     }
