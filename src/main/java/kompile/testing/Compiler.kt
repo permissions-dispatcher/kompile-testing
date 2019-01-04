@@ -3,6 +3,7 @@ package kompile.testing
 import okio.Buffer
 import okio.buffer
 import okio.sink
+import org.apache.commons.io.FileUtils
 import org.jetbrains.kotlin.cli.jvm.K2JVMCompiler
 import org.jetbrains.kotlin.com.google.common.collect.LinkedHashMultimap
 import java.io.File
@@ -139,7 +140,7 @@ class Compiler(private val rootDir: File) {
         val newFileName = url.path.replace(".aar", ".jar")
         val jar = File(File(rootDir, "unzippedAar"), newFileName)
         val sourceInputStream = zipFile.getInputStream(zipFile.getEntry("classes.jar"))
-        sourceInputStream.toFile(jar)
+        FileUtils.copyInputStreamToFile(sourceInputStream, jar)
         return jar
     }
 
