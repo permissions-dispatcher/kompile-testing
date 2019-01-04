@@ -1,4 +1,3 @@
-# Created by .ignore support plugin (hsz.mobi)
 ### Kotlin template
 # Compiled class file
 *.class
@@ -13,7 +12,6 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear

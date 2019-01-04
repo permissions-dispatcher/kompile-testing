@@ -56,8 +56,11 @@ class Compiler(private val rootDir: File) {
         args.add("-no-stdlib")
         args.add("-classpath")
         args.add(fullClasspath().joinToString(separator = ":"))
-        sourcesDir.listFiles().forEach {
-            args.add(it.toString())
+        val sourceFiles = sourcesDir.listFiles()
+        if (sourceFiles != null && sourceFiles.isNotEmpty()) {
+            sourceFiles.forEach {
+                args.add(it.toString())
+            }
         }
         args.addAll(annotationProcessorArgs())
 

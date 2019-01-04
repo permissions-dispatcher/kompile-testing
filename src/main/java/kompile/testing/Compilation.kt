@@ -2,7 +2,6 @@ package kompile.testing
 
 import org.jetbrains.kotlin.cli.common.ExitCode
 import org.junit.ComparisonFailure
-import permissions.dispatcher.processor.kotlin.CompilationWithWarningException
 import java.io.File
 
 class Compilation(private val error: String, private val exitCode: ExitCode, private val generatedKtDir: File) {

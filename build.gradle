@@ -2,8 +2,6 @@ apply plugin: 'kotlin'
 
 buildscript {
     repositories {
-        mavenCentral()
-        google()
         jcenter()
     }
     dependencies {
@@ -17,12 +15,13 @@ repositories {
 
 dependencies {
     // This dependency is exported to consumers, that is to say found on their compile classpath.
-    api "org.jetbrains.kotlin:kotlin-compiler-embeddable:$KOTLIN_VERSION"
     api "org.jetbrains.kotlin:kotlin-annotation-processing-embeddable:$KOTLIN_VERSION"
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-    implementation "com.squareup.okio:okio:2.1.0"
+    implementation "org.jetbrains.kotlin:kotlin-compiler-embeddable:$KOTLIN_VERSION"
+    implementation "com.squareup.okio:okio:$OKIO_VERSION"
     implementation "commons-io:commons-io:$COMMONS_IO_VERSION"
-    implementation "com.google.testing.compile:compile-testing:$COMPILE_TESTING_VERSION"
-    implementation 'junit:junit:4.12'
+    implementation "junit:junit:$JUNIT_VERSION"
+
+    testImplementation "com.google.auto.service:auto-service:1.0-rc4"
 }
 

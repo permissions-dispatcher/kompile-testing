@@ -3,9 +3,9 @@ package kompile.testing
 import org.junit.ComparisonFailure
 import java.io.File
 
-class SuccessfulCompilationClause(private val generatedKtDir: File) {
+class SuccessfulCompilationClause(private val generatedDir: File) {
     fun generatedFile(qualifiedName: String): FileClause {
-        return FileClause(File(generatedKtDir, qualifiedName))
+        return FileClause(File(generatedDir, qualifiedName))
     }
 }
 
