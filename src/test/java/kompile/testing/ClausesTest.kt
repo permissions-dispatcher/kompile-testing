@@ -22,8 +22,8 @@ class ClausesTest {
         val fileName = "test.txt"
         val source = "this is a txt file."
         addFile(root, fileName, source)
-        val fileClause = SuccessfulCompilationClause(root).generatedFile(fileName)
-        fileClause.hasSourceEquivalentTo(source)
+        val clause = SuccessfulCompilationClause(root).generatedFile(fileName)
+        clause.hasSourceEquivalentTo(source)
     }
 
     @Test
@@ -32,8 +32,8 @@ class ClausesTest {
         val fileName = "test.txt"
         val source = "this is a txt file."
         addFile(root, fileName, source)
-        val fileClause = SuccessfulCompilationClause(root).generatedFile(fileName)
-        fileClause.hasSourceEquivalentTo(File(root, fileName))
+        val clause = SuccessfulCompilationClause(root).generatedFile(fileName)
+        clause.hasSourceEquivalentTo(File(root, fileName))
     }
 
     @Test
@@ -45,8 +45,8 @@ class ClausesTest {
             which contains break line.
         """.trimIndent()
         addFile(root, fileName, source)
-        val fileClause = SuccessfulCompilationClause(root).generatedFile(fileName)
-        fileClause.hasSourceEquivalentTo(arrayOf(
+        val clause = SuccessfulCompilationClause(root).generatedFile(fileName)
+        clause.hasSourceEquivalentTo(arrayOf(
                 "this is a txt file",
                 "which contains break line."
         ))
@@ -56,8 +56,8 @@ class ClausesTest {
     fun withErrorContaining() {
         val message = "this is an error message."
         val error = "$message You should check it out!"
-        val fileClause = UnsuccessfulCompilationClause(error)
-        fileClause.withErrorContaining(message)
+        val clause = UnsuccessfulCompilationClause(error)
+        clause.withErrorContaining(message)
     }
 
     @Test
@@ -65,7 +65,7 @@ class ClausesTest {
         expectedException.expect(ComparisonFailure::class.java)
         val message = "Unrelated message."
         val error = "This is an error message. You should check it out!"
-        val fileClause = UnsuccessfulCompilationClause(error)
-        fileClause.withErrorContaining(message)
+        val clause = UnsuccessfulCompilationClause(error)
+        clause.withErrorContaining(message)
     }
 }
