@@ -21,6 +21,7 @@ dependencies {
     // Exported to consumers, that is to say found on their compile classpath.
     api "org.jetbrains.kotlin:kotlin-annotation-processing-embeddable:$KOTLIN_VERSION"
     implementation "org.jetbrains.kotlin:kotlin-compiler-embeddable:$KOTLIN_VERSION"
+    implementation "commons-io:commons-io:$COMMONS_IO_VERSION"
     implementation "com.squareup.okio:okio:$OKIO_VERSION"
     implementation "junit:junit:$JUNIT_VERSION"
     testImplementation files(Jvm.current().getToolsJar())
