@@ -1,0 +1,22 @@
+language: java
+
+jdk:
+  - oraclejdk8
+
+branches:
+  except:
+    - gh-pages
+
+script: ./gradlew clean check --stacktrace
+
+#deploy:
+#  skip_cleanup: true
+#  provider: script
+#  script: ./scripts/release.sh
+#  on:
+#    tags: true
+#    repo: permissions-dispatcher/kompile-testing
+
+cache:
+  directories:
+    - $HOME/.m2

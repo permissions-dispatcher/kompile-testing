@@ -1,3 +1,5 @@
+import org.gradle.internal.jvm.Jvm
+
 apply plugin: 'kotlin'
 
 buildscript {
@@ -14,14 +16,12 @@ repositories {
 }
 
 dependencies {
-    // This dependency is exported to consumers, that is to say found on their compile classpath.
+    // Exported to consumers, that is to say found on their compile classpath.
     api "org.jetbrains.kotlin:kotlin-annotation-processing-embeddable:$KOTLIN_VERSION"
-    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation "org.jetbrains.kotlin:kotlin-compiler-embeddable:$KOTLIN_VERSION"
     implementation "com.squareup.okio:okio:$OKIO_VERSION"
-    implementation "commons-io:commons-io:$COMMONS_IO_VERSION"
     implementation "junit:junit:$JUNIT_VERSION"
-
-    testImplementation "com.google.auto.service:auto-service:1.0-rc4"
+    testImplementation files(Jvm.current().getToolsJar())
+    testImplementation "com.google.auto.service:auto-service:$AUTO_VERSION"
 }
 

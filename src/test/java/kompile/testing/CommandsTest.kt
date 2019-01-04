@@ -5,7 +5,7 @@ import org.junit.Test
 
 class CommandsTest {
     @Test
-    fun kotlinc() {
+    fun kotlincReturnsCompiler() {
         assertNotNull(kotlinc())
     }
 }
