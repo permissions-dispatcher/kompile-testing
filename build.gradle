@@ -29,7 +29,6 @@ dependencies {
 
 publish {
     userOrg = USER
-    repoName = REPO
     groupId = GROUP_ID
     artifactId = ARTIFACT_ID
     publishVersion = VERSION
