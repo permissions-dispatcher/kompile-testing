@@ -1,6 +1,8 @@
-# kompile-testing
+# kompile-testing [![Build Status](https://travis-ci.org/permissions-dispatcher/kompile-testing.svg?branch=master)](https://travis-ci.org/permissions-dispatcher/kompile-testing)
 
-A library for testing `kotlinc` compilation with or kotlin annotation processors(kapt).
+A library for testing `kotlinc` compilation with kotlin annotation processors([kapt](https://kotlinlang.org/docs/reference/kapt.html)).
+
+> NOTE: Current library's status is still in development especially due to performance issue. Use at your own risk:D
 
 ## Installation
 
@@ -31,7 +33,9 @@ kotlinc()
         """.trimIndent())
 ```
 
-You can also test that errors or warnings were reported. The following tests compiling a source file with an annotation processor reported an error:
+You can also test that errors or warnings were reported.
+
+The following tests compiling a source file with an annotation processor reported an error:
 
 ```kotlin
 kotlinc()
