@@ -1,0 +1,27 @@
+language: java
+
+jdk:
+  - oraclejdk8
+
+env:
+  global:
+    - secure: "w+B30gwHClS+mFznmBj4HWWYZOGtpUMLuvXL+II5ne+T+krZRf/ToFHUNAY52RMZpikBcSfTYMOsDLAIKNtwYCupk0TCETw3Gdzn/Jo0K5BxWXrKcl4G9E9JCPSQ32rStCe5jIrXFreq4wj7yjB/3Fdxj2c9jkgAiWIIbQzeociQmCdZNvnITVGmKSD3vFN6JNMQvBezfuPSK+c8lJOy7HFbntH2KD9OQ4oZrgKecNhk/ryc/xEGV4r2DNtCi1tDMw9ub6V2hBYx0Wa+6l/rG1tJgWUn9C3RkhnYk023Ufxvqdc7roWC1j0pFkU3o9ZZThmRZ969W6+HlqLwwv9PpWvIiQ1A9alAc2DNrQWFx9vU2qzAEsjAWVAdiZjlnFh0E0TwVtEr5JThWM52/kRQmxNHP6lLFK8LgF7ne6TV1OzwtuLceRynwWnEbLOuRa5QVEhyM5/5yG2HNhNh+G4K1Z/Duhvg7/c5bE7XMl83Y+LjgK6t9tNKpNCEz/062ddbNXp34bA22L9z8uRxQLFwcszxLAN6c8bQrJrYQInojAQVJBSu56ZblckiJ7uprTIoOLYlj5MyTWEtsEcuQJ5CPhTtIO3YkNlAuLjCYEHx3Zk1HPf4BOrzLwRrUpjTliDwhJOgRzINRpuAJ5W8rS3GKgTf7+fBVqD/fwSvwKKWEww="
+    - secure: "lAdXq7TaLFMHOdLUe9VbAOFZJFhbIxD56YxvTSPKflhjjozJ1+e61TARNaVMZRDvCFSDJp10ybbvdJg8tdVsSxo0lmFCsQ4k76kB2Dh7GsIYjKBTm0+SuLaJiDJQlEf3VLLnqqjTnzw/slQutTPjEIMmYfM6CP3O8OCIGL2p/rnJRmkDpMR+pjc21C4+59eOqlKFJu11GFMOWiDDQV1f1sWyPCbfie1lYBl5KcqLVdSRgqrpYXU/sSH3I5nUDSyJR6ie59GPQp3J9KDPYTbiA09KE97WyxBgZijWnnQwkIULxXOHvHjbin/UUFmN2NqV+IcYzEpcTGj/o5e0AShSYXVK1ZG45vmCfYpxHi6PLqVsAzI7miMF8VfZ/GChC+2rrHDjY+LFfzzPteCNY8RtqKW4+ZiGs9uUItROGhMFZ2+a572Pi9GNPn0vfJeopQWpErECDLJbSAgonGivsw8ahkD2B+9ARUk5iwhZCNzhSFJd3tJotXOmxiR35lZEoVJd6ihhwlEQdYnAEKs0xwhRNQhdVKT8pTglowEakr2IfNb2xQp3lta6azSWibvk0scQvyocwB9pG++G3ANCRC6nmm+wpzxuh8rM4X+lii6SUo1sXbPMOBQKTgehSzuzLaDfgiNbeYMIC1i9JdsLZVPUYvZVL7xX/L6LgI9jSAzetOY="
+
+branches:
+  except:
+    - gh-pages
+
+script: ./gradlew clean check --stacktrace
+
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: ./scripts/release.sh
+  on:
+    tags: true
+    repo: permissions-dispatcher/kompile-testing
+
+cache:
+  directories:
+    - $HOME/.m2
