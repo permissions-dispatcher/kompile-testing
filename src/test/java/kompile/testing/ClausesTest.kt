@@ -27,6 +27,17 @@ class ClausesTest {
     }
 
     @Test
+    fun hasSourceEquivalentToStringFailed() {
+        expectedException.expect(ComparisonFailure::class.java)
+        val root = temporaryFolder.root
+        val fileName = "test.txt"
+        val source = "this is a txt file."
+        addFile(root, fileName, source)
+        val clause = SuccessfulCompilationClause(root).generatedFile(fileName)
+        clause.hasSourceEquivalentTo("unrelated content.")
+    }
+
+    @Test
     fun hasSourceEquivalentToFile() {
         val root = temporaryFolder.root
         val fileName = "test.txt"
