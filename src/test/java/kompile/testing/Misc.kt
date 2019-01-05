@@ -63,7 +63,11 @@ class ValidProcessor : TestAnnotationProcessor()
 
 @AutoService(Processor::class)
 class ThrowExceptionProcessor : TestAnnotationProcessor() {
+    companion object {
+        const val errorMessage = "Throw an exception deliberately."
+    }
+
     override fun throwExceptionIfNeeded() {
-        throw RuntimeException("Throw an exception deliberately.")
+        throw RuntimeException(errorMessage)
     }
 }

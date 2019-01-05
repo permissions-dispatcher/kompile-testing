@@ -4,7 +4,7 @@ import org.junit.Test
 
 class CompilerTest {
     @Test
-    fun succeedsScenario() {
+    fun succeededScenario() {
         val processor = ValidProcessor()
         kotlinc()
                 .withProcessors(processor)
@@ -23,6 +23,6 @@ class CompilerTest {
                 .addKotlin(processor.generatedFileName(), processor.generatedFileContent())
                 .compile()
                 .failed()
-                .withErrorContaining("Throw an exception deliberately.")
+                .withErrorContaining(ThrowExceptionProcessor.errorMessage)
     }
 }
