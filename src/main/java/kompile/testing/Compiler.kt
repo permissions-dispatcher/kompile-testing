@@ -137,7 +137,9 @@ class Compiler(private val rootDir: File) {
 
     private fun extractJarFromAar(url: URL): File {
         val zipFile = ZipFile(url.path)
-        val newFileName = url.path.replace(".aar", ".jar")
+        val newFileName = url.path
+            .substringAfterLast(File.separatorChar)
+            .replace(".aar", ".jar")
         val jar = File(File(rootDir, "unzippedAar"), newFileName)
         val sourceInputStream = zipFile.getInputStream(zipFile.getEntry("classes.jar"))
         FileUtils.copyInputStreamToFile(sourceInputStream, jar)
