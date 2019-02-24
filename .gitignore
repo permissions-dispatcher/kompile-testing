@@ -23,3 +23,6 @@
 .idea/
 out/
 build/
+
+*.iml
+local.properties
