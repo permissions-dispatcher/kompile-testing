@@ -78,22 +78,18 @@ class Compiler(private val rootDir: File) {
                 args.add(it.toString())
             }
         }
-        args.addAll(annotationProcessorArgs())
-
         val generatedDir = File(rootDir, "generated")
-        val kaptArgs = mutableMapOf<String, String>()
-        kaptArgs["kapt.kotlin.generated"] = generatedDir.path
-        args.add("-P")
-        args.add("plugin:org.jetbrains.kotlin.kapt3:apoptions=${encodeOptions(kaptArgs)}")
-
+        args.addAll(annotationProcessorArgs(generatedDir.path))
         val systemErrBuffer = Buffer()
         val exitCode = K2JVMCompiler().exec(errStream = PrintStream(systemErrBuffer.outputStream()), args = *args.toTypedArray())
         return Compilation(systemErrBuffer.readUtf8(), exitCode, generatedDir)
     }
 
-    private fun annotationProcessorArgs(): List<String> {
+    private fun annotationProcessorArgs(generatedDirPath: String): List<String> {
         val sourceDir = File(rootDir, "kapt/sources")
         val stubsDir = File(rootDir, "kapt/stubs")
+        val kaptArgs = mutableMapOf<String, String>()
+        kaptArgs["kapt.kotlin.generated"] = generatedDirPath
         val plugin = classpathFiles.find { it.name.startsWith("kotlin-annotation-processing-embeddable") }
         return listOf(
                 "-Xplugin=$plugin",
@@ -102,7 +98,8 @@ class Compiler(private val rootDir: File) {
                 "-P", "plugin:org.jetbrains.kotlin.kapt3:stubs=$stubsDir",
                 "-P", "plugin:org.jetbrains.kotlin.kapt3:apclasspath=$servicesJar",
                 "-P", "plugin:org.jetbrains.kotlin.kapt3:aptMode=stubsAndApt",
-                "-P", "plugin:org.jetbrains.kotlin.kapt3:correctErrorTypes=true"
+                "-P", "plugin:org.jetbrains.kotlin.kapt3:correctErrorTypes=true",
+                "-P", "plugin:org.jetbrains.kotlin.kapt3:apoptions=${encodeOptions(kaptArgs)}"
         )
     }
 
