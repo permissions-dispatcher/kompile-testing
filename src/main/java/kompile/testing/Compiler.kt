@@ -78,18 +78,17 @@ class Compiler(private val rootDir: File) {
                 args.add(it.toString())
             }
         }
-        val generatedDir = File(rootDir, "generated")
-        args.addAll(annotationProcessorArgs(generatedDir.path))
+        val sourceDir = File(rootDir, "kapt/sources")
+        args.addAll(annotationProcessorArgs(sourceDir))
         val systemErrBuffer = Buffer()
         val exitCode = K2JVMCompiler().exec(errStream = PrintStream(systemErrBuffer.outputStream()), args = *args.toTypedArray())
-        return Compilation(systemErrBuffer.readUtf8(), exitCode, generatedDir)
+        return Compilation(systemErrBuffer.readUtf8(), exitCode, sourceDir)
     }
 
-    private fun annotationProcessorArgs(generatedDirPath: String): List<String> {
-        val sourceDir = File(rootDir, "kapt/sources")
+    private fun annotationProcessorArgs(sourceDir: File): List<String> {
         val stubsDir = File(rootDir, "kapt/stubs")
         val kaptArgs = mutableMapOf<String, String>()
-        kaptArgs["kapt.kotlin.generated"] = generatedDirPath
+        kaptArgs["kapt.kotlin.generated"] = sourceDir.path
         val plugin = classpathFiles.find { it.name.startsWith("kotlin-annotation-processing-embeddable") }
         return listOf(
                 "-Xplugin=$plugin",

@@ -4,12 +4,12 @@ import org.jetbrains.kotlin.cli.common.ExitCode
 import org.junit.ComparisonFailure
 import java.io.File
 
-class Compilation(private val error: String, private val exitCode: ExitCode, private val generatedKtDir: File) {
+class Compilation(private val error: String, private val exitCode: ExitCode, private val generatedDir: File) {
     fun succeeded(): SuccessfulCompilationClause {
         if (exitCode != ExitCode.OK) {
             throw ComparisonFailure(null, ExitCode.OK.name, exitCode.name)
         }
-        return SuccessfulCompilationClause(generatedKtDir)
+        return SuccessfulCompilationClause(generatedDir)
     }
 
     fun succeededWithoutWarnings(): SuccessfulCompilationClause {
