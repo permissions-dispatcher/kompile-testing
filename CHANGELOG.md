@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 0.1.3 *(2019-06-15)*
+------------------------------
+
+- [Support Filer API-generated files](https://github.com/permissions-dispatcher/kompile-testing/pull/13)
+
 Version 0.1.2 *(2019-02-25)*
 ------------------------------
 
